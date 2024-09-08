@@ -1,0 +1,42 @@
+# PORT 
+server:
+  port: 8002
+
+spring:
+  application:
+    name: cardswithpostgresql
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springdb
+    username: tusharnagdive
+    password: root
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    # Specify the path to the main changelog file
+    change-log: classpath:/db/changelog/db.changelog-master.sql
+
+    # Optionally, you can set the default schema if needed
+    # default-schema: public
+
+    # Set whether Liquibase is enabled or not
+    enabled: true
+
+    # Optionally, configure the Liquibase contexts (e.g., development, production)
+    # contexts: development,production
+
+    # Specify the database catalog if needed (useful for multi-tenant setups)
+    # default-catalog: mycatalog
+
+    # You can also configure Liquibase to perform updates at startup
+    # this is usually the default behavior
+    # clear-checksums: true
+
+    # Configure the Liquibase logging level (optional)
+    # logging-level: INFO
