@@ -20,15 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.trailsWithPostGresql.constants.AccountConstants;
 import com.example.trailsWithPostGresql.dto.AccountDto;
 import com.example.trailsWithPostGresql.dto.CustomerDto;
+import com.example.trailsWithPostGresql.dto.ErrorResponseDto;
 import com.example.trailsWithPostGresql.dto.ResponseDto;
 import com.example.trailsWithPostGresql.entities.Accounts;
 import com.example.trailsWithPostGresql.service.IAccountsService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @Validated
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
+@Tag(
+	name = "CRUD REST APIs Accounts Microservices",
+	description = "CRUD REST APIs for CREATE, REMOVE, UPDATE, DELETE"
+)
 public class AccountsController {
 	
 	private IAccountsService iAccountsService;
@@ -38,6 +50,14 @@ public class AccountsController {
 		this.iAccountsService = iAccountsService;
 	}
 
+	@Operation(
+		summary = "Create Account REST API",
+		description = "Add New Account"
+	)
+	@ApiResponse(
+		responseCode = "201",
+		description = "HTTP Status CREATED"
+	)
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {
 		iAccountsService.createAccount(customerDto);
@@ -65,6 +85,14 @@ public class AccountsController {
 	}
 	
 	@DeleteMapping("/delete")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+		@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
+			content = @Content(
+				schema = @Schema(implementation = ErrorResponseDto.class)
+			)
+		)
+	})
 	public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam String mobileNumber) {
 		Boolean isDeleted = this.iAccountsService.deleteAccount(mobileNumber);
 		if(Boolean.TRUE.equals(isDeleted)) {

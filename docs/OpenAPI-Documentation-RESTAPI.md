@@ -3,14 +3,17 @@
 ### Detailed Explanation of Documenting Spring Boot REST API using OpenAPI (SpringDoc)
 
 #### 1. **What is OpenAPI?**
+
 The **OpenAPI Specification (OAS)** defines a standard way to describe REST APIs. It specifies the API's endpoints, input/output parameters, authentication methods, request/response types, and more. The goal is to make APIs easily understandable by both humans and machines.
 
 #### 2. **What is SpringDoc OpenAPI?**
+
 **SpringDoc OpenAPI** is a library that generates OpenAPI 3.0 documentation for your Spring Boot application automatically. It scans your codebase for REST controllers and exposes a Swagger UI where developers can interact with the API. Unlike previous versions of Swagger (such as SpringFox), SpringDoc OpenAPI directly supports OpenAPI 3.0, making it the preferred choice for newer Spring Boot projects.
 
 #### 3. **How to Set Up SpringDoc OpenAPI**
 
 ##### Step 1: Add SpringDoc Dependencies
+
 In your `pom.xml` file (for Maven projects), add the following dependency for SpringDoc OpenAPI:
 
 ```xml
@@ -28,6 +31,7 @@ implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 ```
 
 ##### Step 2: Start Your Application
+
 After adding the SpringDoc dependency, no additional configuration is required. Once the Spring Boot application starts, OpenAPI automatically generates and exposes the documentation at the following endpoints:
 
 - Swagger UI: `http://localhost:8080/swagger-ui.html`
@@ -134,7 +138,7 @@ This will add metadata to your OpenAPI spec that can be viewed on the Swagger UI
 
 #### 7. **Securing API with OpenAPI**
 
-If your API requires authentication, you can document that using the `@SecurityRequirement` annotation. 
+If your API requires authentication, you can document that using the `@SecurityRequirement` annotation.
 
 Here’s how to document a JWT-based authentication mechanism:
 
@@ -243,4 +247,6 @@ public class SwaggerConfig {
 
 1. **SpringDoc OpenAPI** is the preferred way to document Spring Boot REST APIs using the OpenAPI 3.0 specification.
 2. **Swagger UI** provides an interactive way to explore and test your API.
-3. **Open
+3. \*\*Open
+
+http://localhost:8001/swagger-ui/index.html#/
