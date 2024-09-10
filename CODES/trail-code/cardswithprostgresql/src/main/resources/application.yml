@@ -7,7 +7,8 @@ spring:
     name: cardswithpostgresql
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/springdb
+    #url: jdbc:postgresql://localhost:5432/springdb # for localhost
+    url: jdbc:postgresql://db:5432/springdb			# for docker image by google jib
     username: tusharnagdive
     password: root
 
