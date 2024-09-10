@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>loanswithprostgresql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>loanswithprostgresql</name>
 	<description>Micorservice of loan with support of postgresql and liquedbase</description>
 	<url/>
@@ -27,7 +28,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
