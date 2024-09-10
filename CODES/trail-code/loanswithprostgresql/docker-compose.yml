@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  loans-app:
+    image: loanswithpostgresql-app
+    ports:
+      - "8003:8003"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/springdb
+      - SPRING_DATASOURCE_USERNAME=tusharnagdive
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: springdb
+      POSTGRES_USER: tusharnagdive
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
