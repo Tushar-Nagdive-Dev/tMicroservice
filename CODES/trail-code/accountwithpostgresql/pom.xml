@@ -13,8 +13,8 @@
 	<artifactId>accountmswithpostgresql</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
-	<name>trailsWithPostGresql</name>
-	<description>Trails with postgresql</description>
+	<name>accountmswithpostgresql</name>
+	<description>Accounts microservice with postgresql</description>
 	<url/>
 	<licenses>
 		<license/>
