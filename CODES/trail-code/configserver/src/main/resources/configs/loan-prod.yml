@@ -4,7 +4,7 @@ build:
   version: "2.0"
   
 # Cards Details
-cards:
+loan:
   message: "Welcome to Big Bank Loan related Prod APIs"
   loanDetails:
     types: 
