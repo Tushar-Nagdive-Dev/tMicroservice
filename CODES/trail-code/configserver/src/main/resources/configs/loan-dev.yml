@@ -20,6 +20,6 @@ loan:
       - 30 lakhs
       - 50 lakhs
     rating: 5
-  Bank: "Big Bank"
+  bank: "Big Bank"
   email: "bigBank@loans.com"
   env: "DEV"
