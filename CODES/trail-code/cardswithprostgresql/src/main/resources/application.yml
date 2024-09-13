@@ -4,11 +4,12 @@ server:
 
 spring:
   application:
-    name: cardswithpostgresql
-
+    name: cards
+  config:
+    import: configserver:http://localhost:8000
   datasource:
-    #url: jdbc:postgresql://localhost:5432/springdb # for localhost
-    url: jdbc:postgresql://db:5432/springdb			# for docker image by google jib
+    url: jdbc:postgresql://localhost:5432/springdb # for localhost
+    # url: jdbc:postgresql://db:5432/springdb			# for docker image by google jib
     username: tusharnagdive
     password: root
 

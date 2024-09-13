@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: loanswithpostgresql
+    name: loan
 
   datasource:
     # url: jdbc:postgresql://localhost:5432/springdb # for localhost
