@@ -140,4 +140,6 @@ By following these steps and leveraging Hookdeck's features, you can gain valuab
 
 
 
-
+### for connecting Hookdeck
+hookdeck login --cli-key 5yui8eg7cjlj3sxeleh4g56mb1kjwrygiqnb7k7hf0xdlv6hah
+hookdeck listen [port] Source
