@@ -5,7 +5,21 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "cards")
-public record CardServiceInfoDto(String message, Map<List<String>, List<String>> cardDetails, String bank, String email, String env) {
+import lombok.Getter;
+import lombok.Setter;
 
+@ConfigurationProperties(prefix = "cards")
+@Setter
+@Getter
+public class CardServiceInfoDto {
+	
+	private String message;
+	
+	private Map<List<String>, List<String>> cardDetails;
+	
+	private String bank;
+	
+	private String email;
+	
+	private String env;
 }

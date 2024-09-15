@@ -14,7 +14,12 @@ public interface IAccountsService {
 	
 	CustomerDto fetchAccount(String mobileNumber) ;
 	
-	Boolean udpateAccountDetails(CustomerDto customerDto);
+	/**
+    *
+    * @param customerDto - CustomerDto Object
+    * @return boolean indicating if the update of Account details is successful or not
+    */
+   Boolean updateAccount(CustomerDto customerDto);
 	
 	Boolean deleteAccount(String mobileNumber);
 }

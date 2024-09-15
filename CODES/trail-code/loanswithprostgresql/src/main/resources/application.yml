@@ -12,6 +12,12 @@ spring:
   config:
     import: configserver:http://localhost:8000
 
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
   datasource:
     url: jdbc:postgresql://localhost:5432/springdb # for localhost
     # url: jdbc:postgresql://postgres:5432/springdb
@@ -29,3 +35,8 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.sql
     enabled: true
 
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: "*"

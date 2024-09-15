@@ -5,15 +5,17 @@ import com.example.accountmswithpostgresql.entities.Accounts;
 
 public class AccountMapper {
 	
-	public static AccountDto mapToAccountDto(Accounts accounts, AccountDto accountDto) {
-		accountDto.setAccountType(accounts.getAccountType());
-		accountDto.setBranchAddress(accounts.getBranchAddress());
-		return accountDto;
-	}
-	
-	public static Accounts mapToAccount(Accounts accounts, AccountDto accountDto) {
-		accounts.setAccountType(accountDto.getAccountType());
-		accounts.setBranchAddress(accountDto.getBranchAddress());
-		return accounts;
-	}
+	public static AccountDto mapToAccountsDto(Accounts accounts, AccountDto accountsDto) {
+        accountsDto.setAccountNumber(accounts.getAccountNumber());
+        accountsDto.setAccountType(accounts.getAccountType());
+        accountsDto.setBranchAddress(accounts.getBranchAddress());
+        return accountsDto;
+    }
+
+    public static Accounts mapToAccounts(AccountDto accountsDto, Accounts accounts) {
+        accounts.setAccountNumber(accountsDto.getAccountNumber());
+        accounts.setAccountType(accountsDto.getAccountType());
+        accounts.setBranchAddress(accountsDto.getBranchAddress());
+        return accounts;
+    }
 }

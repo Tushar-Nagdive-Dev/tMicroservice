@@ -5,10 +5,19 @@ server:
 spring:
   profiles:
     active: prod
+
   application:
     name: cards
+
   config:
     import: configserver:http://localhost:8000
+
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
   datasource:
     url: jdbc:postgresql://localhost:5432/springdb # for localhost
     # url: jdbc:postgresql://db:5432/springdb			# for docker image by google jib
@@ -23,7 +32,11 @@ spring:
       ddl-auto: update
 
   liquibase:
-
     change-log: classpath:/db/changelog/db.changelog-master.sql
-
     enabled: true
+
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: "*"

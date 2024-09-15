@@ -23,20 +23,19 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 	
-	@Basic
-	@Column(name="created_time")
 	@CreatedDate
-	private LocalDateTime createdTime;
-	
-	@Column(name="modified_time")
-	@LastModifiedDate
-	private LocalDateTime modifiedTime;
-	
-	@Column(name = "created_by")
-	@CreatedBy
-	private String creator;
-	
-	@Column(name = "modified_by")
-	@LastModifiedBy
-	private String modifier;
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
+
+    @LastModifiedDate
+    @Column(insertable = false)
+    private LocalDateTime updatedAt;
+
+    @LastModifiedBy
+    @Column(insertable = false)
+    private String updatedBy;
 }
