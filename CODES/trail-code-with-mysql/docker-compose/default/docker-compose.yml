@@ -1,0 +1,163 @@
+version: "3.8"
+
+services:
+  accountsdb:
+    image: mysql
+    container_name: accountsdb
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: accountsdb
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+
+  cardsdb:
+    image: mysql
+    container_name: cardsdb
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cardsdb
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+
+  loansdb:
+    image: mysql
+    container_name: loansdb
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loansdb
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+
+  configserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "tusharnagdivedev/configserver:v3"
+    container_name: configserver-ms
+    ports:
+      - "8000:8000"
+    platform: linux/amd64
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+
+  accounts:
+    image: "tusharnagdivedev/accounts:v3"
+    container_name: accounts-ms
+    ports:
+      - "8001:8001"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      accountsdb:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8000/"
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
+
+  loans:
+    image: "tusharnagdivedev/loans:v3"
+    container_name: loans-ms
+    ports:
+      - "8003:8003"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      loansdb:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8000/"
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3308/loansdb"
+
+  cards:
+    image: "tusharnagdivedev/cards:v3"
+    container_name: cards-ms
+    ports:
+      - "8002:8002"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      cardsdb:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - tusharnagdivedev
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8000/"
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3307/cardsdb"
+
+networks:
+  tusharnagdivedev:
+    driver: "bridge"

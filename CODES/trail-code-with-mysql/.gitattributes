@@ -1,0 +1,2 @@
+CODES/trail-code-with-mysql/sqlectron.app/Contents/Resources/app.asar filter=lfs diff=lfs merge=lfs -text
+CODES/trail-code-with-mysql/sqlectron.app/Contents/Frameworks/Electron[[:space:]]Framework.framework/Versions/A/Electron[[:space:]]Framework filter=lfs diff=lfs merge=lfs -text
