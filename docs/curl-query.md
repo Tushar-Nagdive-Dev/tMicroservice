@@ -1,4 +1,5 @@
 ### POST Create Account
+
 `curl -X POST http://localhost:8001/api/create -H "Content-Type: application/json" -d '{"name": "John Cena", "email": "johncena@example.com", "mobileNumber":"6234561728"}'`
 
 create account and customer entry in DB
@@ -15,17 +16,32 @@ update account and customer entry in DB
 
 get account details by mobilenumber
 
-
 ### Encrypt In Spring config
+
 `curl -X POST http://localhost:8000/encrypt -d 'bigBank@cards.com'`
-Encrypt 
+Encrypt
+
 ### Decrypt In Spring Config
+
 `curl -X POST http://localhost:8000/decrypt -d 'f98da8b76ea61e6bf582b87ea6c41f951113c27bd2f5e7b50c7fbd57a7f5a6f9cfae63849f16233adc5c4f66ab7800e8'`
 Decrypt
+
 ### Refresh Spring cloud config data
+
 `curl -X POST http://localhost:8002/actuator/refresh`
 Refresh Data
 
 ### BusRefresh
+
 `curl -X POST http://localhost:8000/actuator/busrefresh`
 Refresh all instance data
+
+### POST Create Card deatials
+
+`curl -X POST http://localhost:8002/api/create\?mobileNumber\=6234561728`
+cretea card enrty in DB
+
+### POST Create Loan deatials
+
+`curl -X POST http://localhost:8003/api/create\?mobileNumber\=6234561728`
+cretea loan enrty in DB
