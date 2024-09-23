@@ -45,3 +45,8 @@ cretea card enrty in DB
 
 `curl -X POST http://localhost:8003/api/create\?mobileNumber\=6234561728`
 cretea loan enrty in DB
+
+### Safe Shutdown with eureka server
+
+`curl -X POST http://localhost:8001/actuator/shutdown`
+{"message":"Shutting down, bye..."}
