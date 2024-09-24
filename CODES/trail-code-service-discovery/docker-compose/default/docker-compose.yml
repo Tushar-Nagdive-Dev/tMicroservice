@@ -56,6 +56,22 @@ services:
       file: common-config.yml
       service: microservice-eureka-config
 
+  accounts1:
+    image: "tusharnagdivedev/accounts:v4"
+    container_name: accounts-ms1
+    ports:
+      - "8004:8001"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
   loans:
     image: "tusharnagdivedev/loans:v4"
     container_name: loans-ms
