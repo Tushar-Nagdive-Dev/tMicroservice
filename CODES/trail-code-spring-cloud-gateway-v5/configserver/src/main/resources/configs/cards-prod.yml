@@ -1,0 +1,26 @@
+# Build Version
+build:
+  name: "Cards MS"
+  version: "2.0"
+  
+# Cards Details
+cards:
+  message: "Welcome to Big Bank Card related PROD APIs"
+  cardDetails:
+    types: 
+      - Regular
+      - Premium
+      - Super 
+      - Co-branded
+      - Commercial or Business
+      - CashBack
+      - Secured
+    limits:
+      - 1 lakhs
+      - 1.5 lakhs
+      - 2 lakhs
+      - 5 lakhs
+    rating: 5
+  Bank: "Big Bank"
+  email: "bigBank@cards.com"
+  env: "PROD"
