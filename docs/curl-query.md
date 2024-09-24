@@ -54,3 +54,7 @@ cretea loan enrty in DB
 ### Get All Account, card, loan, and customrt
 
 `curl -X GET http://localhost:8001/api/fetchCustomerDetails\?mobileNumber\=6234561728`
+
+### Gateway API
+
+`curl -X POST http://localhost:8072/ACCOUNTS/api/create -H "Content-Type: application/json" -d '{"name": "John Cena", "email": "johncena@example.com", "mobileNumber":"6234561728"}'`
