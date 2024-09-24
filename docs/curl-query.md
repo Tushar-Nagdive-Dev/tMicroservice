@@ -50,3 +50,7 @@ cretea loan enrty in DB
 
 `curl -X POST http://localhost:8001/actuator/shutdown`
 {"message":"Shutting down, bye..."}
+
+### Get All Account, card, loan, and customrt
+
+`curl -X GET http://localhost:8001/api/fetchCustomerDetails\?mobileNumber\=6234561728`
