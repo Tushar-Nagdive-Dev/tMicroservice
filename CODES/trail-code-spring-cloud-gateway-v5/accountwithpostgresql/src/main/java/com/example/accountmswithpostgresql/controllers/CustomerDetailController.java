@@ -2,6 +2,7 @@ package com.example.accountmswithpostgresql.controllers;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,8 @@ import com.example.accountmswithpostgresql.dto.ErrorResponseDto;
 import com.example.accountmswithpostgresql.service.ICustomerDetailsService;
 
 import org.apache.hc.core5.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,8 @@ import jakarta.validation.constraints.Pattern;
 @Tag(name = "REST APIs Customers Microservices", description = "REST APIs for Big Bank details")
 public class CustomerDetailController {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomerDetailController.class);
+
     private final ICustomerDetailsService iCustomerDetailsService;
 
     public CustomerDetailController(ICustomerDetailsService iCustomerDetailsService) {
@@ -43,9 +48,10 @@ public class CustomerDetailController {
 		)
 	})
     @GetMapping("/fetchCustomerDetails")
-    public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+    public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestHeader("bigBank-correlation-id") String correlationId, @RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     String mobileNumber) {
-        CustomerDetailsDto customerDetailsDto = this.iCustomerDetailsService.fetchCustomerDetails(mobileNumber);
+        log.debug("BigBank-Correlation-id Found : {}", correlationId);
+        CustomerDetailsDto customerDetailsDto = this.iCustomerDetailsService.fetchCustomerDetails(mobileNumber, correlationId);
         return ResponseEntity.status(HttpStatus.SC_OK).body(customerDetailsDto);
     }
 }
