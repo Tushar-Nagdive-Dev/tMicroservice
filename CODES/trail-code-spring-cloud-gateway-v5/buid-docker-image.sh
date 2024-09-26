@@ -22,3 +22,8 @@ echo "\n"
 echo "loans"
 cd ../loanswithprostgresql/
 ./mvnw compile jib:dockerBuild
+
+echo "\n"
+echo "gateway"
+cd ../gatewayserver/
+./mvnw compile jib:dockerBuild

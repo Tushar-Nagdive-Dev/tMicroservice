@@ -44,6 +44,12 @@ services:
     container_name: accounts-ms
     ports:
       - "8001:8001"
+    healthcheck:
+      test: "wget --spider --quiet http://localhost:8001/actuator/health || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     depends_on:
       configserver:
         condition: service_healthy
@@ -76,6 +82,12 @@ services:
     container_name: loans-ms
     ports:
       - "8003:8003"
+    healthcheck:
+      test: "wget --spider --quiet http://localhost:8003/actuator/health || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     depends_on:
       configserver:
         condition: service_healthy
@@ -92,6 +104,12 @@ services:
     container_name: cards-ms
     ports:
       - "8002:8002"
+    healthcheck:
+      test: "wget --spider --quiet http://localhost:8002/actuator/health || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     depends_on:
       configserver:
         condition: service_healthy
@@ -99,6 +117,24 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  gatewayserver:
+    image: "tusharnagdivedev/gatewayserver:v5"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
