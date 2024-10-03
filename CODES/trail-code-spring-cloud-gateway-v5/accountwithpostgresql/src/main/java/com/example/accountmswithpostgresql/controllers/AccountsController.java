@@ -3,6 +3,8 @@ package com.example.accountmswithpostgresql.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,7 @@ import com.example.accountmswithpostgresql.dto.ResponseDto;
 import com.example.accountmswithpostgresql.entities.Accounts;
 import com.example.accountmswithpostgresql.service.*;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -44,6 +47,8 @@ import jakarta.validation.Valid;
 	description = "CRUD REST APIs for CREATE, REMOVE, UPDATE, DELETE"
 )
 public class AccountsController {
+
+	private static final Logger log = LoggerFactory.getLogger(AccountsController.class);
 	
 	private IAccountsService iAccountsService;
 	
@@ -155,9 +160,17 @@ public class AccountsController {
 			schema = @Schema(implementation = ErrorResponseDto.class)
 		))
 	})
+
+	@Retry(name = "getBuildVersion", fallbackMethod = "getBuildVersionFallBack")
 	@GetMapping("/build-info")
 	public ResponseEntity<String> getBuildVersion() {
+		log.debug("getBuildVersion() method Invoked !!!");
 		return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+	}
+
+	public ResponseEntity<String> getBuildVersionFallBack(Throwable throwable) {
+		log.debug("getBuildVersionFallBack() method Invoked !!!");
+		return ResponseEntity.status(HttpStatus.OK).body("X.X.X");
 	}
 	
 	@Operation(summary = "Get JAVA Version", description = "Get Java version informations that is deployed into account microservices")
@@ -179,6 +192,7 @@ public class AccountsController {
 			schema = @Schema(implementation = ErrorResponseDto.class)
 		))
 	})
+	
 	@GetMapping("/contact-info")
 	public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
 		return ResponseEntity.status(HttpStatus.OK).body(accountsContactsInfo);
