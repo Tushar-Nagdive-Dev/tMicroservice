@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.accountmswithpostgresql.dto.CardsDto;
+import com.example.accountmswithpostgresql.fallBack.CardsFallBack;
 
 /**
  * cardsFeignClient
  */
-@FeignClient("cards")
+@FeignClient(name = "cards", fallback = CardsFallBack.class)
 public interface CardsFeignClient {
 
     @GetMapping(value = "/api/fetch", consumes = "application/json")
