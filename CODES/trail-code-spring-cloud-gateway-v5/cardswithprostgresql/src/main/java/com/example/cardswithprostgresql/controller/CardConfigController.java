@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cardswithprostgresql.dto.CardServiceInfoDto;
 import com.example.cardswithprostgresql.dto.ErrorResponseDto;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -44,6 +45,7 @@ public class CardConfigController {
 			schema = @Schema(implementation = ErrorResponseDto.class)
 		))
 	})
+
 	@GetMapping("/build-info")
 	public ResponseEntity<String> getBuildVersion() {
 		return ResponseEntity.status(HttpStatus.OK).body("Build Name: " + buildName + ", Build Version: " + buildVersion);
@@ -56,8 +58,14 @@ public class CardConfigController {
 			schema = @Schema(implementation = ErrorResponseDto.class)
 		))
 	})
+
+	@RateLimiter(name = "getContactInfo", fallbackMethod = "getContactInfoFallBack")
 	@GetMapping("/card-info")
 	public ResponseEntity<CardServiceInfoDto> getContactInfo() {
 		return ResponseEntity.status(HttpStatus.OK).body(cardServiceInfoDto);
+	}
+
+	public ResponseEntity<CardServiceInfoDto> getContactInfoFallBack(Throwable throwable) {
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 }
