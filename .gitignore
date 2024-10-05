@@ -2,3 +2,8 @@
 
 .sonarlint
 .DS_Store
+
+observability-and-monitoring-v6/.vscode/
+observability-and-monitoring-v6/docker-compose/default/.data/
+CODES/observability-and-monitoring-v6/docker-compose/default/.data/
+CODES/observability-and-monitoring-v6/docker-compose/default/.data/minio/

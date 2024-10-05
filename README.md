@@ -159,3 +159,7 @@ spring.data.redis.connect-timeout=2s
 spring.data.redis.host = localhost
 spring.data.redis.port = 6379
 spring.data.redis.timeout = 1s
+
+### Prometheus
+
+http://localhost:9090/targets?search=
