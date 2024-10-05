@@ -64,7 +64,9 @@ public class CardsController {
     public ResponseEntity<ResponseDto> createCard(@Valid @RequestParam
                                                       @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                       String mobileNumber) {
+        log.debug("createCard method start");
         iCardsService.createCard(mobileNumber);
+        log.debug("createCard method ends");
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(new ResponseDto(CardsConstants.STATUS_201, CardsConstants.MESSAGE_201));
@@ -91,8 +93,9 @@ public class CardsController {
     public ResponseEntity<CardsDto> fetchCardDetails(@RequestHeader("bigBank-correlation-id") String correlationId, @RequestParam
                                                                @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                                String mobileNumber) {
-        log.debug("BigBank-Correlation-id Found : {}", correlationId);
+        log.debug("fetchCardDetails method starts");
         CardsDto cardsDto = iCardsService.fetchCard(mobileNumber);
+        log.debug("fetchCardDetails method ends");
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 

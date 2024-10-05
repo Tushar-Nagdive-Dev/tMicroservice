@@ -49,8 +49,9 @@ public class CustomerDetailController {
     @GetMapping("/fetchCustomerDetails")
     public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestHeader("bigBank-correlation-id") String correlationId, @RequestParam @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     String mobileNumber) {
-        log.debug("BigBank-Correlation-id Found : {}", correlationId);
+        log.debug("fetchCustomerDetails method start");
         CustomerDetailsDto customerDetailsDto = this.iCustomerDetailsService.fetchCustomerDetails(mobileNumber, correlationId);
+        log.debug("fetchCustomerDetails method end");
         return ResponseEntity.status(HttpStatus.SC_OK).body(customerDetailsDto);
     }
 }

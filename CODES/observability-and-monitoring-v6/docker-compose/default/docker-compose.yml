@@ -45,7 +45,7 @@ services:
     volumes:
       - ../observability/alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    command:  run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+    command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     ports:
       - 12345:12345
     depends_on:
@@ -92,6 +92,19 @@ services:
       file: common-config.yml
       service: network-deploy-service
 
+  tempo:
+    image: grafana/tempo:2.4.2
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+    volumes:
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   grafana:
     image: grafana/grafana:latest
     environment:
@@ -108,7 +121,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasource/datasource.yml
+      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -195,7 +208,7 @@ services:
     ports:
       - "3100:3100"
     healthcheck:
-      test: ["CMD", "service", "nginx", "status"]
+      test: [ "CMD", "service", "nginx", "status" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -214,15 +227,16 @@ services:
         condition: service_healthy
     healthcheck:
       test: "wget --spider --quiet http://localhost:8070/actuator/health || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 30s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
     environment:
       SPRING_APPLICATION_NAME: "eurekaserver"
+      OTEL_SERVICE_NAME: "eurekaserver"
 
   configserver:
     build:
@@ -235,13 +249,15 @@ services:
       - "8000:8000"
     healthcheck:
       test: "curl --fail --silent localhost:8000/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: "configserver"
 
   accounts:
     image: "tusharnagdivedev/accounts:v6"
@@ -250,9 +266,9 @@ services:
       - "8001:8001"
     healthcheck:
       test: "wget --spider --quiet http://localhost:8001/actuator/health || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 30s
     depends_on:
       configserver:
@@ -261,9 +277,11 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
+      OTEL_SERVICE_NAME: "accounts"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
+      
 
   accounts1:
     image: "tusharnagdivedev/accounts:v6"
@@ -277,6 +295,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
+      OTEL_SERVICE_NAME: "accounts1"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -288,9 +307,9 @@ services:
       - "8003:8003"
     healthcheck:
       test: "wget --spider --quiet http://localhost:8003/actuator/health || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 30s
     depends_on:
       configserver:
@@ -299,6 +318,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "loans"
+      OTEL_SERVICE_NAME: "accounts1"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -310,9 +330,9 @@ services:
       - "8002:8002"
     healthcheck:
       test: "wget --spider --quiet http://localhost:8002/actuator/health || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 30s
     depends_on:
       configserver:
@@ -321,6 +341,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+      OTEL_SERVICE_NAME: "cards"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -339,6 +360,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
+      OTEL_SERVICE_NAME: "gatewayserver"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
