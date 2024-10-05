@@ -4,7 +4,7 @@
 .DS_Store
 
 observability-and-monitoring-v6/.vscode/
-observability-and-monitoring-v6/docker-compose/default/.data/
-CODES/observability-and-monitoring-v6/docker-compose/default/.data/
-CODES/observability-and-monitoring-v6/docker-compose/default/.data/minio/
+observability-and-monitoring-v6/docker-compose/**/.data/
+CODES/observability-and-monitoring-v6/docker-compose/**/.data/
+CODES/observability-and-monitoring-v6/docker-compose/**/.data/minio/
 CODES/observability-and-monitoring-v6/.vscode

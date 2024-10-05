@@ -47,4 +47,4 @@ datasources:
           name: TraceID
           url: '$${__value.raw}'
     secureJsonData:
-      httpHeaderValue1: "tenant1"
+      httpHeaderValue1: "tenant1" 
