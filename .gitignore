@@ -8,3 +8,4 @@ observability-and-monitoring-v6/docker-compose/**/.data/
 CODES/observability-and-monitoring-v6/docker-compose/**/.data/
 CODES/observability-and-monitoring-v6/docker-compose/**/.data/minio/
 CODES/observability-and-monitoring-v6/.vscode
+CODES/ms-securities-via-Oauth2-and-openid-v7/docker-compose/**/.data
