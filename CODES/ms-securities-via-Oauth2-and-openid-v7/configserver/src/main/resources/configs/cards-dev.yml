@@ -1,0 +1,25 @@
+# Build Version
+build:
+  name: "Cards MS"
+  version: "1.0"
+  
+# Cards Details
+cards:
+  message: "Welcome to Big Bank Card related Dev APIs"
+  cardDetails:
+    types: 
+      - Regular
+      - Premium
+      - Super 
+      - Co-branded
+      - Commercial or Business
+      - CashBack
+      - Secured
+    limits:
+      - 1 lakhs
+      - 1.5 lakhs
+      - 2 lakhs
+      - 5 lakhs
+  bank: "Big Bank"
+  email: "bigBank@cards.com"
+  env: "DEV"
