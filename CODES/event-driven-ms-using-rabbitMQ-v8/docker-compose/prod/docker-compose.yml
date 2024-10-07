@@ -230,7 +230,7 @@ services:
       service: network-deploy-service
   
   eurekaserver:
-    image: "tusharnagdivedev/eurekaserver:v7"
+    image: "tusharnagdivedev/eurekaserver:v8"
     container_name: eurekaserver-ms
     platform: linux/amd64
     ports:
@@ -255,7 +255,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "tusharnagdivedev/configserver:v7"
+    image: "tusharnagdivedev/configserver:v8"
     container_name: configserver-ms
     platform: linux/amd64
     ports:
@@ -273,7 +273,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   accounts:
-    image: "tusharnagdivedev/accounts:v7"
+    image: "tusharnagdivedev/accounts:v8"
     container_name: accounts-ms
     healthcheck:
       test: "wget --spider --quiet http://localhost:8001/actuator/health || exit 1"
@@ -295,7 +295,7 @@ services:
       
 
   accounts1:
-    image: "tusharnagdivedev/accounts:v7"
+    image: "tusharnagdivedev/accounts:v8"
     container_name: accounts-ms1
     depends_on:
       configserver:
@@ -310,7 +310,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "tusharnagdivedev/loans:v7"
+    image: "tusharnagdivedev/loans:v8"
     container_name: loans-ms
     healthcheck:
       test: "wget --spider --quiet http://localhost:8003/actuator/health || exit 1"
@@ -331,7 +331,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "tusharnagdivedev/cards:v7"
+    image: "tusharnagdivedev/cards:v8"
     container_name: cards-ms
     healthcheck:
       test: "wget --spider --quiet http://localhost:8002/actuator/health || exit 1"
@@ -352,7 +352,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "tusharnagdivedev/gatewayserver:v7"
+    image: "tusharnagdivedev/gatewayserver:v8"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"

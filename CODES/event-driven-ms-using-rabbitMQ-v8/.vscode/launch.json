@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MessageApplication",
+            "request": "launch",
+            "mainClass": "com.bigBank.message.MessageApplication",
+            "projectName": "message"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ConfigserverApplication<configserver>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
