@@ -24,6 +24,11 @@ cd ../loanswithprostgresql/
 ./mvnw compile jib:dockerBuild
 
 echo "\n"
+echo "message"
+cd ../message/
+./mvnw compile jib:dockerBuild
+
+echo "\n"
 echo "gateway"
 cd ../gatewayserver/
 ./mvnw compile jib:dockerBuild
