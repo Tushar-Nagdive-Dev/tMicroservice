@@ -10,3 +10,5 @@ CODES/observability-and-monitoring-v6/docker-compose/**/.data/minio/
 CODES/observability-and-monitoring-v6/.vscode
 CODES/ms-securities-via-Oauth2-and-openid-v7/docker-compose/**/.data
 CODES/event-driven-ms-using-rabbitMQ-v8/docker-compose/**/.data
+CODES/event-driven-ms-using-kafka-v9/kafka_2.13-3.8.0/
+CODES/event-driven-ms-using-kafka-v9/docker-compose/**/.data

@@ -1,0 +1,25 @@
+# Build Version
+build:
+  name: "Loans MS"
+  version: "2.0"
+  
+# Cards Details
+loan:
+  message: "Welcome to Big Bank Loan related Prod APIs"
+  loanDetails:
+    types: 
+      - Home
+      - Gold
+      - Vehicle 
+      - Unsecured
+      - Loan Against Property
+      - Loan Against Securities
+    limits:
+      - 10 lakhs
+      - 20 lakhs
+      - 30 lakhs
+      - 50 lakhs
+    rating: 5
+  Bank: "Big Bank"
+  email: "bigBank@loans.com"
+  env: "PROD"
