@@ -1,0 +1,27 @@
+dependencies:
+- name: bigBank-common
+  repository: file://../../bigBank-common
+  version: 0.1.0
+- name: configserver
+  repository: file://../../bigBank-services/configserver
+  version: 0.1.0
+- name: eurekaserver
+  repository: file://../../bigBank-services/eurekaserver
+  version: 0.1.0
+- name: accounts
+  repository: file://../../bigBank-services/accounts
+  version: 0.1.0
+- name: cards
+  repository: file://../../bigBank-services/cards
+  version: 0.1.0
+- name: loans
+  repository: file://../../bigBank-services/loans
+  version: 0.1.0
+- name: gatewayserver
+  repository: file://../../bigBank-services/gatewayserver
+  version: 0.1.0
+- name: message
+  repository: file://../../bigBank-services/message
+  version: 0.1.0
+digest: sha256:86f7e877c604bb53ac27713942c007ff62454d360aa61dea50a876b678a8a498
+generated: "2024-10-09T13:00:35.695189+05:30"

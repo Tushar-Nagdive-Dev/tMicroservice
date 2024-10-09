@@ -1,0 +1,6 @@
+dependencies:
+- name: bigBank-common
+  repository: file://../../bigBank-common
+  version: 0.1.0
+digest: sha256:ef016872cf1ffd4fa82727fe2db13b28016d29fa1c9f8d1f119b129238b61415
+generated: "2024-10-09T12:28:34.102118+05:30"
