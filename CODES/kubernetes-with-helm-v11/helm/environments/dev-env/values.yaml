@@ -1,5 +1,5 @@
 global:
-  configMapName: bigBankdev-configmap
+  configMapName: bigbankdev-configmap
   activeProfile: dev
   configServerURL: configserver:http://configserver:8000/
   eurekaServerURL: http://eurekaserver:8070/eureka/

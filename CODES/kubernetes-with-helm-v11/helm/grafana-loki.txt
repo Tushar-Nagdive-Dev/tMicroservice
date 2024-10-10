@@ -1,0 +1,38 @@
+helm install loki grafana-loki
+NAME: loki
+LAST DEPLOYED: Wed Oct  9 15:52:53 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: grafana-loki
+CHART VERSION: 4.6.18
+APP VERSION: 3.2.0
+
+** Please be patient while the chart is being deployed **
+
+Installed components:
+
+  * ingester
+  * distributor
+  * querier
+  * query-frontend
+  * promtail
+  * compactor
+  * gateway
+
+1. Get the gateway URL by running these commands:
+    echo "The Gateway is available at http://127.0.0.1:80"
+    kubectl port-forward svc/loki-grafana-loki-gateway 80:80 &
+
+WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
+  - compactor.resources
+  - distributor.resources
+  - gateway.resources
+  - ingester.resources
+  - promtail.resources
+  - querier.resources
+  - queryFrontend.resources
+  - queryScheduler.resources
++info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/

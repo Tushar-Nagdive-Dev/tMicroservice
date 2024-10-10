@@ -1,0 +1,36 @@
+helm install tempo grafana-tempo
+NAME: tempo
+LAST DEPLOYED: Wed Oct  9 16:25:44 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: grafana-tempo
+CHART VERSION: 3.7.11
+APP VERSION: 2.6.0
+
+** Please be patient while the chart is being deployed **
+
+Installed components:
+
+  * ingester
+  * distributor
+  * querier
+  * query-frontend
+  * compactor
+  * vulture
+
+1. Get the query-frontend URL by running these commands:
+    echo "The Query Frontend is available at http://127.0.0.1:3200"
+    kubectl port-forward svc/tempo-grafana-tempo-query-frontend 3200:3200 &
+
+WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
+  - compactor.resources
+  - distributor.resources
+  - ingester.resources
+  - metricsGenerator.resources
+  - querier.resources
+  - queryFrontend.resources
+  - vulture.resources
++info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
